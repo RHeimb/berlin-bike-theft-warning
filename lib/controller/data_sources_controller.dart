@@ -111,8 +111,8 @@ class PolygonController extends StateNotifier<AsyncValue<List<Polygon>>> {
           }
         }
         final color =
-            Color((math.Random().nextDouble() * 0xFFFFFF).toInt() << 0)
-                .withOpacity(0.2);
+            // Color((math.Random().nextDouble() * 0xFFFFFF).toInt() << 0)
+            Colors.blue.shade400.withOpacity(0.6);
         final poly = Polygon(
             points: geoSerie.toLatLng(ignoreErrors: true),
             color: color,

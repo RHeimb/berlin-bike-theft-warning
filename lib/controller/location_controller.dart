@@ -5,7 +5,7 @@ import 'package:latlong2/latlong.dart';
 import 'package:location/location.dart';
 
 final locationMarkerProvider =
-    StateProvider<LatLng?>((ref) => LatLng(52.5185917, 13.405555));
+    StateProvider<LatLng?>((ref) => LatLng(52.51784, 13.406815));
 final locationErrorProvider = StateProvider<CustomException?>((ref) {
   return null;
 });
@@ -26,14 +26,9 @@ class LocationController extends StateNotifier<AsyncValue<LocationData?>> {
     try {
       final LocationData _location = await location.getLocation();
       if (mounted) {
-        // print(_location.latitude);
-        // print(_location.longitude);
-
         /// so that the latlng point is available independable from the onTouch method
         _read(locationMarkerProvider).state =
             LatLng(_location.latitude!, _location.longitude!);
-        // print(DateTime.fromMillisecondsSinceEpoch(_location.time!.toInt()));
-
         state = AsyncValue.data(_location);
       }
     } on PlatformException catch (_) {

@@ -11,9 +11,10 @@ import '../general_provider.dart';
 class MapScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
-    final title = watch(chartNameProvider).state;
-    final lorCode = watch(selectedLorProvider);
-    final color = watch(theftsColorCodeProvider(lorCode.state));
+    final lorCode = watch(selectedLorProvider).state?.item1;
+    final title = watch(selectedLorProvider).state?.item2;
+    final selectedPolygon = watch(selectedLorProvider).state?.item3;
+    final color = watch(theftsColorCodeProvider(lorCode));
 
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -53,7 +54,7 @@ class MapScreen extends ConsumerWidget {
             Column(
               children: [
                 Expanded(
-                  child: MapWidget(),
+                  child: MapWidget(selectedPolygon),
                   flex: 4,
                 ),
               ],

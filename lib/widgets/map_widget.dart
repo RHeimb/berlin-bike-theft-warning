@@ -16,7 +16,9 @@ final mapControllerMoveProvider = StateProvider<MapController>((ref) {
 });
 
 class MapWidget extends ConsumerWidget {
-  final LatLng centerLatLng = LatLng(52.5185917, 13.405555);
+  final LatLng centerLatLng = LatLng(52.51784, 13.406815);
+  final _selectedPolygon;
+  MapWidget(this._selectedPolygon);
 
   @override
   Widget build(BuildContext context, ScopedReader watch) {
@@ -28,15 +30,20 @@ class MapWidget extends ConsumerWidget {
 
     LatLng currentLatLng;
 
-    // final selectedPoly = watch(selectedPolygonProvider);
-
     var markers = <Marker>[];
-
+    final List<Polygon> _selectedPolygons =
+        _selectedPolygon != null ? [_selectedPolygon] : [];
     currentLatLng = location.when(
       data: (LocationData? locData) {
+        ///_selectedLatLng holds the point which onTap yields
         if (locData != null) {
           final _currLatLng = LatLng(locData.latitude!, locData.longitude!);
-          _mapController.move(_currLatLng, 7);
+
+          /// move map iff tapped point is the same as point of user locaton
+          /// -> ensure onTap functon and getLocation function are working independently
+          if (_currLatLng == _selectedLatLng) {
+            _mapController.move(_currLatLng, 7);
+          }
 
           /// override previous marker via insert
           markers.insert(
@@ -55,8 +62,8 @@ class MapWidget extends ConsumerWidget {
           return _selectedLatLng ?? centerLatLng;
         }
       },
-      error: (e, _) => LatLng(52.5185917, 13.405555), // better print error
-      loading: () => LatLng(52.5185917, 13.405555),
+      error: (e, _) => LatLng(52.51784, 13.406815), // better print error
+      loading: () => LatLng(52.51784, 13.406815),
     );
 
     /// for tapping otherwise use selectedPolygonProvider?
@@ -64,7 +71,8 @@ class MapWidget extends ConsumerWidget {
       try {
         context.read(locationMarkerProvider).state = point;
         currentLatLng = point;
-        _mapController.move(point, 7);
+        print(point);
+        _mapController.move(point, _mapController.zoom);
       } on StateError catch (_) {
         print("not in LOR");
       }
@@ -100,11 +108,11 @@ class MapWidget extends ConsumerWidget {
                   selectedPolygon, // on Tap kann verwendet werden um ein popup an der Stelle anzuzeige
               minZoom: 1.0,
               maxZoom: resolutions.length - 1,
-              zoom: resolutions.length - 1,
+              zoom: 3.0,
               crs: epsg25833CRS,
               center: currentLatLng,
-              bounds: LatLngBounds(
-                  LatLng(52.6596, 13.1314), LatLng(52.2794, 13.6489)),
+              // bounds: LatLngBounds(
+              //     LatLng(52.6596, 13.1314), LatLng(52.2794, 13.6489)),
               plugins: _zoomButtonsState ? [MapZoomButtonsPlugin()] : []),
           layers: [
             TileLayerOptions(
@@ -120,7 +128,10 @@ class MapWidget extends ConsumerWidget {
                   format: 'image/jpeg',
                   layers: ['OSM-WMS']),
             ),
-            MarkerLayerOptions(markers: markers)
+            MarkerLayerOptions(markers: markers),
+            PolygonLayerOptions(
+              polygons: _selectedPolygons,
+            ),
           ],
           nonRotatedLayers: _zoomButtonsState
               ? [

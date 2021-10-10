@@ -16,7 +16,7 @@ class ChartDialog extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final title = useProvider(chartNameProvider).state;
+    final title = useProvider(selectedLorProvider).state?.item2;
 
     return SafeArea(
       maintainBottomViewPadding: true,

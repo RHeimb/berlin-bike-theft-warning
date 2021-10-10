@@ -1,36 +1,28 @@
 import 'package:bikedata_berlin/controller/data_sources_controller.dart';
 import 'package:bikedata_berlin/controller/location_controller.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tuple/tuple.dart';
 
 import 'utils/is_point_in_polygon.dart';
 
-final chartNameProvider = StateProvider<String?>((ref) {
-  var polygons = ref.watch(polygonProvider);
-  var m = ref.watch(lorHashMapProvider).state;
-  var point = ref.watch(locationMarkerProvider).state;
-  if (polygons.data != null) {
-    return m[polygons.data!.value
-            .firstWhere((p) => pointInPolygon(point, p))
-            .hashCode]!
-        .elementAt(0);
-  } else {
-    return null;
-  }
-});
+// final selectedPolygonProvider = StateProvider<Polygon?>((ref) => null);
 
-/// set LOR Code and LOR name for building the chart widgets
-final selectedLorProvider = StateProvider<String?>((ref) {
+/// set LOR Code(1) and LOR name(2) and the corresponding Polygon(3) for building the chart widgets
+final selectedLorProvider =
+    StateProvider<Tuple3<String?, String?, Polygon>?>((ref) {
   var polygons = ref.watch(polygonProvider);
   var m = ref.read(lorHashMapProvider).state;
   var point = ref.watch(locationMarkerProvider).state;
   if (polygons.data != null) {
-    return m[polygons.data!.value
-            .firstWhere((p) => pointInPolygon(point, p))
-            .hashCode]!
-        .elementAt(1);
+    Polygon _selectedPolygon =
+        polygons.data!.value.firstWhere((p) => pointInPolygon(point, p));
+    // ref.read(selectedPolygonProvider).state = _selectedPolygon;
+    return Tuple3(m[_selectedPolygon.hashCode]!.elementAt(1),
+        m[_selectedPolygon.hashCode]!.elementAt(0), _selectedPolygon);
   } else {
     return null;
   }

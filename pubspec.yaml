@@ -1,4 +1,4 @@
-name: bikedata_berlin
+name: biketheft_berlin
 description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
@@ -41,6 +41,7 @@ dependencies:
   geojson: ^1.0.0
   simplify: ^1.0.2
   shared_preferences: ^2.0.7
+  tuple: ^2.0.0
 
 
   # The following adds the Cupertino Icons font to your application.
