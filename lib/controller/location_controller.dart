@@ -1,4 +1,4 @@
-import 'package:bikedata_berlin/services/custom_exception.dart';
+import 'package:biketheft_berlin/services/custom_exception.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:latlong2/latlong.dart';

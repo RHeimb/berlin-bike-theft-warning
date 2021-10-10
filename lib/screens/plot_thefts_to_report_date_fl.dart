@@ -1,6 +1,6 @@
-import 'package:bikedata_berlin/controller/lor_bike_theft_info.dart';
-import 'package:bikedata_berlin/plot_provider.dart';
-import 'package:bikedata_berlin/widgets/thefts_per_month_bar_chart.dart';
+import 'package:biketheft_berlin/controller/lor_bike_theft_info.dart';
+import 'package:biketheft_berlin/plot_provider.dart';
+import 'package:biketheft_berlin/widgets/thefts_per_month_bar_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../general_provider.dart';

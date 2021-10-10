@@ -1,8 +1,8 @@
-import 'package:bikedata_berlin/controller/lor_bike_theft_info.dart';
-import 'package:bikedata_berlin/screens/plot_thefts_to_report_date_fl.dart';
-import 'package:bikedata_berlin/screens/settings_screen.dart';
-import 'package:bikedata_berlin/widgets/chart_box.dart';
-import 'package:bikedata_berlin/widgets/map_widget.dart';
+import 'package:biketheft_berlin/controller/lor_bike_theft_info.dart';
+import 'package:biketheft_berlin/screens/plot_thefts_to_report_date_fl.dart';
+import 'package:biketheft_berlin/screens/settings_screen.dart';
+import 'package:biketheft_berlin/widgets/chart_box.dart';
+import 'package:biketheft_berlin/widgets/map_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 

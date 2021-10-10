@@ -1,5 +1,5 @@
-import 'package:bikedata_berlin/controller/data_sources_controller.dart';
-import 'package:bikedata_berlin/controller/location_controller.dart';
+import 'package:biketheft_berlin/controller/data_sources_controller.dart';
+import 'package:biketheft_berlin/controller/location_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

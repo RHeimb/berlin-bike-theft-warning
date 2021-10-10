@@ -1,4 +1,4 @@
-import 'package:bikedata_berlin/services/csv_download_service.dart';
+import 'package:biketheft_berlin/services/csv_download_service.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
@@ -8,7 +8,8 @@ class Listener extends Mock {
 }
 
 void main() {
-  test('download csv as string convert it to list and print it to console', () async {
+  test('download csv as string convert it to list and print it to console',
+      () async {
     CsvDownloadService service = CsvDownloadService();
     var data = await service.csvToList();
     print(data);

@@ -1,4 +1,4 @@
-import 'package:bikedata_berlin/shared_utility.dart';
+import 'package:biketheft_berlin/shared_utility.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../general_provider.dart';

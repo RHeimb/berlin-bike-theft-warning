@@ -1,8 +1,8 @@
-import 'package:bikedata_berlin/controller/data_sources_controller.dart';
-import 'package:bikedata_berlin/controller/location_controller.dart';
-import 'package:bikedata_berlin/general_provider.dart';
-import 'package:bikedata_berlin/widgets/get_location_button.dart';
-import 'package:bikedata_berlin/widgets/map_zoom_buttons_plugin.dart';
+import 'package:biketheft_berlin/controller/data_sources_controller.dart';
+import 'package:biketheft_berlin/controller/location_controller.dart';
+import 'package:biketheft_berlin/general_provider.dart';
+import 'package:biketheft_berlin/widgets/get_location_button.dart';
+import 'package:biketheft_berlin/widgets/map_zoom_buttons_plugin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_map/flutter_map.dart';

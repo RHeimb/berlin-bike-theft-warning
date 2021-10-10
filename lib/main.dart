@@ -1,5 +1,5 @@
-import 'package:bikedata_berlin/controller/app_theme_controller.dart';
-import 'package:bikedata_berlin/screens/map_screen.dart';
+import 'package:biketheft_berlin/controller/app_theme_controller.dart';
+import 'package:biketheft_berlin/screens/map_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';

@@ -1,5 +1,5 @@
-import 'package:bikedata_berlin/controller/app_theme_controller.dart';
-import 'package:bikedata_berlin/general_provider.dart';
+import 'package:biketheft_berlin/controller/app_theme_controller.dart';
+import 'package:biketheft_berlin/general_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 

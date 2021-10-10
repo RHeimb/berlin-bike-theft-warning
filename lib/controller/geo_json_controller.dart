@@ -1,11 +1,13 @@
-import 'package:bikedata_berlin/services/custom_exception.dart';
-import 'package:bikedata_berlin/services/geojson_service.dart';
+import 'package:biketheft_berlin/services/custom_exception.dart';
+import 'package:biketheft_berlin/services/geojson_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final geoJsonExceptionProvider = StateProvider<CustomException?>((ref) => null);
 
 final geoJsonProvider = FutureProvider<String?>((ref) async {
-  final geoJsonString = await ref.read(geoJsonServiceProvider).readGeoJson(path: 'assets/lor_planungsraeume_2021.json');
+  final geoJsonString = await ref
+      .read(geoJsonServiceProvider)
+      .readGeoJson(path: 'assets/lor_planungsraeume_2021.json');
   return geoJsonString;
 });
 

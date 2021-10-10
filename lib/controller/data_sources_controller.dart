@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:math' as math;
 import 'dart:math';
-import 'package:bikedata_berlin/services/custom_exception.dart';
-import 'package:bikedata_berlin/services/geojson_service.dart';
+import 'package:biketheft_berlin/services/custom_exception.dart';
+import 'package:biketheft_berlin/services/geojson_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
