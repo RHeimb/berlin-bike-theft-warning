@@ -1,0 +1,16 @@
+[
+ [09.10.2020, 08.10.2020, 13, 09.10.2020, 12, 7601547, 300, Nein, Herrenfahrrad, Fahrraddiebstahl, Sonstiger schwerer Diebstahl von Fahrrädern],
+ [30.05.2021, 28.05.2021, 17, 30.05.2021, 8, 7601547, 180, Nein, Herrenfahrrad, Fahrraddiebstahl, Einfacher Diebstahl von Fahrrädern],
+ [04.06.2021, 29.05.2021, 23, 30.05.2021, 10, 7601547, 100, Nein, Herrenfahrrad, Fahrraddiebstahl, Einfacher Diebstahl von Fahrrädern],
+ [06.07.2021, 02.07.2021, 16, 04.07.2021, 11, 7601547, 399, Nein, Mountainbike, Fahrraddiebstahl, Sonstiger schwerer Diebstahl von Fahrrädern],
+ [14.09.2020, 14.09.2020, 17, 14.09.2020, 19, 7601547, 499, Nein, Herrenfahrrad, Fahrraddiebstahl, Sonstiger schwerer Diebstahl von Fahrrädern]
+]
+
+2,4
+	
+
+	dauer in d = TATZEIT_ENDE_DATUM - TATZEIT_ANFANG_DATUM
+	dauer in h = 24 * dauer in d - abs(TATZEIT_ENDE_STUNDE - TATZEIT_ANFANG_STUNDE)  -> außer TATZEIT_ENDE_STUNDE == 0, dann dauer in d += 1
+	
+
+I/flutter ( 9770): LocationData<lat: 52.5185917, long: 13.405555>
