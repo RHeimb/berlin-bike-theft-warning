@@ -11,6 +11,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   await Hive.openBox('csvBox');
+  await Hive.openBox('etagBox');
   final sharedPreferences = await SharedPreferences.getInstance();
   runApp(
     ProviderScope(

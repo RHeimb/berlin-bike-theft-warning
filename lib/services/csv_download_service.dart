@@ -1,24 +1,55 @@
 import 'dart:io';
 
 import 'package:csv/csv.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
 
+final csvBoxProvider = Provider<Box<dynamic>>((ref) {
+  var csvBox = Hive.box('csvBox');
+  print(csvBox.get('lastModified').toString());
+  ref.onDispose(() async {
+    await csvBox.compact();
+    await csvBox.close();
+  });
+  return csvBox;
+});
+
 final csvDownloadServiceProvider = Provider<CsvDownloadService>((ref) {
-  return CsvDownloadService();
+  final Box csvBox = ref.read(csvBoxProvider);
+  if (csvBox.get('lastModified') == null) {
+    csvBox.put('hasChanges', true);
+  }
+
+  return CsvDownloadService(ref.read, csvBox);
 });
 
 class CsvDownloadService {
-  const CsvDownloadService();
+  CsvDownloadService(this._read, this._csvBox);
+  final Reader _read;
+  final Box _csvBox;
 
   Future<String?> getCsv() async {
-    var url =
-        Uri.parse('https://www.internetwache-polizei-berlin.de/vdb/Fahrraddiebstahl.csv');
+    final _lastModified = _csvBox.get('lastModified');
+    var url = Uri.parse(
+        'https://www.internetwache-polizei-berlin.de/vdb/Fahrraddiebstahl.csv');
     var response = await http.get(url);
     if (response.statusCode == 200) {
-      return response.body;
+      if (_lastModified != null) {
+        await _csvBox.put('lastModified', response.headers['last-modified']);
+        if (_lastModified == response.headers['last-modified']) {
+          await _csvBox.put('hasChanges', false);
+          return response.body;
+        } else {
+          await _csvBox.put('lastModified', response.headers['last-modified']);
+          return response.body;
+        }
+      } else {
+        await _csvBox.put('lastModified', response.headers['last-modified']);
+        return response.body;
+      }
     }
   }
 
@@ -39,16 +70,16 @@ class CsvDownloadService {
   }
 
   Future<List<List<dynamic>>> getLatestCsvList() async {
-    // var csvBox = Hive.box('csvBox');
     String currentMonth = DateFormat.MMMM().format(DateTime.now());
     Directory appDocDir = await getApplicationSupportDirectory();
     final String appDocPath = appDocDir.path;
     final String path = "$appDocPath\\csv-$currentMonth.csv";
     print(path);
 
-    final String file = await File(path).readAsString().then((String content) => content);
+    final String file =
+        await File(path).readAsString().then((String content) => content);
     final rowsAsListOfValues = const CsvToListConverter().convert(file);
-    // await csvBox.put('latestList', rowsAsListOfValues);
+    await _csvBox.put('latestList', rowsAsListOfValues);
     return rowsAsListOfValues;
   }
 }

@@ -1,3 +1,4 @@
+import 'package:biketheft_berlin/controller/csv_download_controller.dart';
 import 'package:biketheft_berlin/controller/data_sources_controller.dart';
 import 'package:biketheft_berlin/controller/location_controller.dart';
 import 'package:biketheft_berlin/general_provider.dart';
@@ -72,7 +73,7 @@ class MapWidget extends ConsumerWidget {
         context.read(locationMarkerProvider).state = point;
         currentLatLng = point;
         print(point);
-        _mapController.move(point, _mapController.zoom);
+        // _mapController.move(point, _mapController.zoom);
       } on StateError catch (_) {
         print("not in LOR");
       }

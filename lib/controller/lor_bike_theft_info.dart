@@ -14,7 +14,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 /// Return all rows that correspond to a given LOR Code
 final lorBikeTheftInfoProvider =
     FutureProvider.family<List<dynamic>?, String?>((ref, lor) async {
-  final csvList = await ref.watch(csvListProvider.future);
+  final csvList = await ref.read(csvListProvider
+      .future); // read! not watch -> streaming will start a new request while the current is still running
   if (lor != null && csvList != null) {
     // print(csvList.where((row) => row.contains(int.parse(lor))).toList());
 

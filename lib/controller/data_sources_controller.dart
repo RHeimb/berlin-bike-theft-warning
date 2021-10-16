@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:math' as math;
 import 'dart:math';
 import 'package:biketheft_berlin/services/custom_exception.dart';
 import 'package:biketheft_berlin/services/geojson_service.dart';
@@ -21,43 +20,6 @@ final geoJsonStringProvider = FutureProvider<String?>((ref) async {
 
   return geoJsonString;
 });
-
-// final dataSourcesProvider =
-//     StateNotifierProvider<MapDataSourceController, AsyncValue<MapDataSource>>(
-//   (ref) {
-//     final keyList = ["PLR_NAME", "PLR_ID"];
-//     final labelKey = "PLR_NAME";
-//     return MapDataSourceController(ref.read, keyList, labelKey);
-//   },
-// );
-
-// class MapDataSourceController extends StateNotifier<AsyncValue<MapDataSource>> {
-//   final Reader _read;
-//   final keyList;
-//   final labelKey;
-//   MapDataSourceController(
-//     this._read,
-//     this.keyList,
-//     this.labelKey,
-//   ) : super(AsyncValue.loading()) {
-//     loadDataSources();
-//   }
-
-//   Future<void> loadDataSources() async {
-//     try {
-//       final MapDataSource vectorMap = await _read(geoJsonStringProvider.future)
-//           .then((json) => MapDataSource.geoJSON(
-//               geojson: json!, keys: this.keyList, labelKey: this.labelKey));
-//       if (mounted) {
-//         state = AsyncValue.data(vectorMap);
-//       }
-//     } on CustomException catch (e) {
-//       print(e.message);
-
-//       _read(dataSourcesExceptionProvider).state = e;
-//     }
-//   }
-// }
 
 /// Maps Prpoerties from GEOJson as List of Strings to the Hash of a Polygon
 final lorHashMapProvider = StateProvider<Map<int, List<String>>>((ref) => {});
