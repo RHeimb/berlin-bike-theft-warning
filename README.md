@@ -15,15 +15,15 @@ Data sources:
 https://daten.berlin.de/datensaetze/fahrraddiebstahl-berlin
 https://daten.odis-berlin.de/
 
-<img alt="Initial Location/Map Center" src="Screenshot_1633969471.png" width="400"/>
-<img alt="Initial Location Bar Chart" src="Screenshot_1633969479.png" width="400"/>
+<img alt="Initial Location/Map Center" src="fastlane\metadata\android\en-US\images\phoneScreenshots\Screenshot_1633969471.png" width="400"/>
+<img alt="Initial Location Bar Chart" src="fastlane\metadata\android\en-US\images\phoneScreenshots\Screenshot_1633969479.png" width="400"/>
 
 The Floating Action Button is color coded.  
 Green: more than 20 bike thefts below average.  
 Yellow: less than 20 bike thefts below/above average.  
 Red: more than 20 bike thefts above average.  
-<img alt="Floating Button is color coded" src="Screenshot_1633969488.png" width="400"/>
-<img alt="Bar Chart" src="Screenshot_1633969494.png" width="400"/>  
+<img alt="Floating Button is color coded" src="fastlane\metadata\android\en-US\images\phoneScreenshots\Screenshot_1633969488.png" width="400"/>
+<img alt="Bar Chart" src="fastlane\metadata\android\en-US\images\phoneScreenshots\Screenshot_1633969494.png" width="400"/>  
 By pressing the button a bar chart will pop up.
 
 
