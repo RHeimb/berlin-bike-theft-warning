@@ -1,3 +1,4 @@
+import 'package:biketheft_berlin/size_helpers.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -37,8 +38,9 @@ class TheftsPerMonthBarChart extends HookWidget {
           showTitles: false,
         ),
         leftTitles: SideTitles(
+          reservedSize: 18,
           showTitles: true,
-          interval: 1,
+          interval: 2,
           margin: 1,
           getTextStyles: (context, value) =>
               const TextStyle(fontSize: 8, letterSpacing: 0),
@@ -46,7 +48,7 @@ class TheftsPerMonthBarChart extends HookWidget {
         bottomTitles: SideTitles(
           rotateAngle: 30,
           showTitles: true,
-          reservedSize: 14,
+          reservedSize: 16,
           getTextStyles: (context, value) => const TextStyle(
             color: Colors.white70,
             fontWeight: FontWeight.normal,
@@ -59,7 +61,7 @@ class TheftsPerMonthBarChart extends HookWidget {
             final String isoDateString = date.toIso8601String();
             final List<String> dateStringList = isoDateString.split('-');
 
-            return ('${dateStringList[1]}.${dateStringList[0]}');
+            return ('${dateStringList[1]}.${dateStringList[0].substring(2)}');
           },
         ),
       ),

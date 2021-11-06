@@ -1,11 +1,13 @@
+import 'package:biketheft_berlin/size_helpers.dart';
 import 'package:flutter/material.dart';
 
 class ChartBox extends StatelessWidget {
-  const ChartBox({Key? key, required this.title, required this.chartWidget})
+  ChartBox({Key? key, required this.title, required this.chartWidget})
       : super(key: key);
 
   final String? title;
   final Widget chartWidget;
+  final _scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +37,17 @@ class ChartBox extends StatelessWidget {
                   ),
                   Expanded(
                     flex: 8,
-                    child: chartWidget,
+                    child: Scrollbar(
+                      controller: _scrollController,
+                      isAlwaysShown: true,
+                      child: SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          controller: _scrollController,
+                          child: Container(
+                              width: displayWidth(context),
+                              padding: EdgeInsets.all(10),
+                              child: chartWidget)),
+                    ),
                   ),
                   Expanded(
                     flex: 0,

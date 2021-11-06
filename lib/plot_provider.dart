@@ -63,5 +63,6 @@ final theftsToReportDateChartDataFl =
   }
   // sort the dates from earliest to latest
   barChartGroupData.sort((a, b) => a.x.compareTo(b.x));
+
   return barChartGroupData;
 });

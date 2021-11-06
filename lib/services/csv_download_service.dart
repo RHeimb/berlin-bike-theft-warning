@@ -9,7 +9,7 @@ import 'package:path_provider/path_provider.dart';
 
 final csvBoxProvider = Provider<Box<dynamic>>((ref) {
   var csvBox = Hive.box('csvBox');
-  print(csvBox.get('lastModified').toString());
+  //print(csvBox.get('lastModified').toString());
   ref.onDispose(() async {
     await csvBox.compact();
     await csvBox.close();
@@ -39,6 +39,8 @@ class CsvDownloadService {
     if (response.statusCode == 200) {
       if (_lastModified != null) {
         await _csvBox.put('lastModified', response.headers['last-modified']);
+        print(_lastModified);
+        print(response.headers['last-modified']);
         if (_lastModified == response.headers['last-modified']) {
           await _csvBox.put('hasChanges', false);
           return response.body;
