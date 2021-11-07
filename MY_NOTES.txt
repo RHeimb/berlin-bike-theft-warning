@@ -1,8 +1,0 @@
-
-	
-	dauer in d = TATZEIT_ENDE_DATUM - TATZEIT_ANFANG_DATUM
-	dauer in h = 24 * dauer in d - abs(TATZEIT_ENDE_STUNDE - TATZEIT_ANFANG_STUNDE)  -> außer TATZEIT_ENDE_STUNDE == 0, dann dauer in d += 1
-	
-
-seperate onTap Metod from getLocation Method
-outside bounds (nor LOR) doesnt work with onTap

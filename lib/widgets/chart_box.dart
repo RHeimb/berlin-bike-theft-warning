@@ -41,12 +41,13 @@ class ChartBox extends StatelessWidget {
                       controller: _scrollController,
                       isAlwaysShown: true,
                       child: SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          controller: _scrollController,
-                          child: Container(
-                              width: displayWidth(context),
-                              padding: EdgeInsets.all(10),
-                              child: chartWidget)),
+                        scrollDirection: Axis.horizontal,
+                        controller: _scrollController,
+                        child: Container(
+                            width: displayWidth(context),
+                            padding: EdgeInsets.all(10),
+                            child: chartWidget),
+                      ),
                     ),
                   ),
                   Expanded(

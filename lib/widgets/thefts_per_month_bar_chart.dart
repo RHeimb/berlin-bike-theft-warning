@@ -15,7 +15,7 @@ class TheftsPerMonthBarChart extends HookWidget {
   Widget build(BuildContext context) {
     return BarChart(BarChartData(
       borderData: FlBorderData(show: false),
-      groupsSpace: 1,
+      groupsSpace: 1.5,
       alignment: BarChartAlignment.spaceEvenly,
       barGroups: seriesList,
       barTouchData: BarTouchData(
@@ -38,7 +38,7 @@ class TheftsPerMonthBarChart extends HookWidget {
           showTitles: false,
         ),
         leftTitles: SideTitles(
-          reservedSize: 18,
+          reservedSize: 10,
           showTitles: true,
           interval: 2,
           margin: 1,
