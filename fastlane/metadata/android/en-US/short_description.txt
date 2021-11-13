@@ -1,1 +1,1 @@
-Informs about the number of stolen bicycles in one area either by location or by tapping (for Berlin).
+Bicycle thefts in for Berlin
