@@ -1,12 +1,4 @@
-Berlin-bike-theft-warning is a simple application which informs the user about the number of stolen bicycles either by location or by tapping.
-It utilizes Riverpod/Provider for State Management and OSM Tiles.
-
-Packages:
-- `flutter_riverpod` for state management
-- `hive` as local database
-- `hive_flutter` extension for hive
-- `csv` converts csv to nested lists
-- `location` handles realtime location in iOS and Android
-- `flutter_maps` A Dart implementation of Leaflet for Flutter apps.
-`proj4dart` needed for custom CRS 
+Berlin-bike-theft-warning is a simple application which informs the user about the number of stolen bicycles 
+either by location or by tapping.
+The data is provided by Polizei Berlin and distributed by ODIS
 

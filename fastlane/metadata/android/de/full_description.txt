@@ -1,0 +1,3 @@
+Diese App zeigt die Anzahl gestohlener Fahrrad in Berliner Kiezen (LORs)
+Die Daten werden von der Berliner Polizei erfasst und über das ODIS jedem frei zur Verfügung gestellt.
+Der zentrale Button in der Appbar ist nach dem Ampelschema kodiert. Ein Klick auf selbigen öffnet ein einfaches Balkendiagramm.
