@@ -1,4 +1,4 @@
-package com.example.bikedata_berlin
+package de.example.bikedata_berlin
 
 import io.flutter.embedding.android.FlutterActivity
 
