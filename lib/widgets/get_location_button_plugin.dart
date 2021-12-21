@@ -4,9 +4,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map/plugin_api.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:location/location.dart';
 
 class GetLocationButtonPluginOption extends LayerOptions {
   final double padding;
@@ -81,10 +81,10 @@ class GetLocationButton extends ConsumerWidget {
                     .read(locationControllerProvider.notifier)
                     .getLocation()
                     .whenComplete(() => location.when(
-                          data: (LocationData? locData) {
+                          data: (Position? locData) {
                             if (locData != null) {
                               final _currLatLng =
-                                  LatLng(locData.latitude!, locData.longitude!);
+                                  LatLng(locData.latitude, locData.longitude);
                               markerPos = _currLatLng;
                               context.read(locationMarkerProvider).state =
                                   _currLatLng;
