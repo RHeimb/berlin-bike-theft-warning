@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:csv/csv.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:http/http.dart' as http;
@@ -9,7 +10,7 @@ import 'package:path_provider/path_provider.dart';
 
 final csvBoxProvider = Provider<Box<dynamic>>((ref) {
   var csvBox = Hive.box('csvBox');
-  //print(csvBox.get('lastModified').toString());
+  // print(csvBox.get('lastModified').toString());
   ref.onDispose(() async {
     await csvBox.compact();
     await csvBox.close();
@@ -28,6 +29,7 @@ final csvDownloadServiceProvider = Provider<CsvDownloadService>((ref) {
 
 class CsvDownloadService {
   CsvDownloadService(this._read, this._csvBox);
+
   final Reader _read;
   final Box _csvBox;
 
@@ -40,16 +42,18 @@ class CsvDownloadService {
       if (_lastModified != null) {
         await _csvBox.put('lastModified', response.headers['last-modified']);
         print(_lastModified);
-        print(response.headers['last-modified']);
+        // print(response.headers['last-modified']);
         if (_lastModified == response.headers['last-modified']) {
           await _csvBox.put('hasChanges', false);
           return response.body;
         } else {
           await _csvBox.put('lastModified', response.headers['last-modified']);
+          await _csvBox.put('hasChanges', true);
           return response.body;
         }
       } else {
         await _csvBox.put('lastModified', response.headers['last-modified']);
+        await _csvBox.put('hasChanges', true);
         return response.body;
       }
     }
@@ -57,6 +61,7 @@ class CsvDownloadService {
 
   Future<List<List<dynamic>>> csvToList() async {
     final csv = await getCsv();
+
     final rowsAsListOfValues = const CsvToListConverter().convert(csv);
     return rowsAsListOfValues;
   }

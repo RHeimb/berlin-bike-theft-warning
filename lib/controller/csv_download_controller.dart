@@ -7,7 +7,7 @@ final csvListProvider = FutureProvider<List<dynamic>?>(
   (ref) async {
     final csvBox = ref.read(csvBoxProvider);
     final csvDownloadService = ref.read(csvDownloadServiceProvider);
-
+    await csvDownloadService.getCsv();
     if (csvBox.get('hasChanges') == true) {
       await csvDownloadService.saveCsvToDevice();
       var newList = await csvDownloadService.getLatestCsvList();
