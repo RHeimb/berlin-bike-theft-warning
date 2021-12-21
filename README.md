@@ -6,7 +6,7 @@ It utilizes Riverpod/Provider for State Management and OSM Tiles.
 - `hive` as local database
 - `hive_flutter` extension for hive
 - `csv` converts csv to nested lists
-- `location` handles realtime location in iOS and Android
+- `geolocator` handles realtime location in iOS and Android
 - `flutter_maps` A Dart implementation of Leaflet for Flutter apps.
 `proj4dart` needed for custom CRS 
 
