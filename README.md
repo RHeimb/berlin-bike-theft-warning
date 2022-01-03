@@ -1,5 +1,12 @@
+Berlin-bike-theft-warning
+-------------------------
+
 Berlin-bike-theft-warning is a simple application which informs the user about the number of stolen bicycles either by location or by tapping.
 It utilizes Riverpod/Provider for State Management and OSM Tiles.
+
+[<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
+     alt="Get it on F-Droid"
+     height="80">](https://f-droid.org/packages/de.example.fahrraddiebstahl_berlin/)
 
 ## Packages
 - `flutter_riverpod` for state management
@@ -9,7 +16,6 @@ It utilizes Riverpod/Provider for State Management and OSM Tiles.
 - `geolocator` handles realtime location in iOS and Android
 - `flutter_maps` A Dart implementation of Leaflet for Flutter apps.
 `proj4dart` needed for custom CRS 
-
 
 Data sources:
 https://daten.berlin.de/datensaetze/fahrraddiebstahl-berlin
