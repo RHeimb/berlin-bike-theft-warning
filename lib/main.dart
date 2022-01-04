@@ -1,6 +1,5 @@
 import 'package:biketheft_berlin/controller/app_theme_controller.dart';
 import 'package:biketheft_berlin/screens/map_screen.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -28,6 +27,10 @@ class Homepage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
     final _appThemeState = watch(appThemeControllerProvider);
+    // if (csvUpdate.state == true) {
+    //   ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    // }
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: context

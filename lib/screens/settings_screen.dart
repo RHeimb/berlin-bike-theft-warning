@@ -90,7 +90,7 @@ class MetadataDialog extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final csvBox = useProvider(csvBoxProvider);
-    final String? dataTimestamp = csvBox.get('lastModified');
+    final String? dataTimestamp = csvBox.get('lastModified').toString();
 
     return SafeArea(
       maintainBottomViewPadding: true,

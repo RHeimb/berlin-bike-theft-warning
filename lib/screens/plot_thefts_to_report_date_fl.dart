@@ -1,5 +1,6 @@
 import 'package:biketheft_berlin/controller/lor_bike_theft_info.dart';
 import 'package:biketheft_berlin/plot_provider.dart';
+import 'package:biketheft_berlin/widgets/thefts_per_day_bar_chart.dart';
 import 'package:biketheft_berlin/widgets/thefts_per_month_bar_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -18,6 +19,7 @@ class PlotTheftsToReportDateFl extends ConsumerWidget {
       errorMsg = Text('Nicht im Stadtbereich');
     }
     final csv = watch(lorBikeTheftInfoProvider(lor));
+    final chartId = watch(chartIdProvider);
 
     return csv.when(
         data: (lorData) {
@@ -26,8 +28,22 @@ class PlotTheftsToReportDateFl extends ConsumerWidget {
               child: errorMsg,
             );
           } else {
-            final seriesList = watch(theftsToReportDateChartDataFl(lorData));
-            return TheftsPerMonthBarChart(seriesList: seriesList);
+            switch (chartId.state) {
+              case 0:
+                final seriesList =
+                    watch(monthlyTheftsToReportDateChartDataFl(lorData));
+                return TheftsPerMonthBarChart(seriesList: seriesList);
+              case 1:
+                final seriesList =
+                    watch(dailyTheftsToReportDateChartDataFl(lorData));
+                return TheftsPerDayBarChart(seriesList: seriesList);
+              default:
+                final seriesList =
+                    watch(monthlyTheftsToReportDateChartDataFl(lorData));
+                return TheftsPerDayBarChart(seriesList: seriesList);
+            }
+
+            // return TheftsPerMonthBarChart(seriesList: seriesList);
           }
         },
         loading: () => Center(

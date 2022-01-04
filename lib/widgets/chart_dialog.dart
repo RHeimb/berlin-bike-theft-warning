@@ -47,18 +47,35 @@ class ChartDialog extends HookWidget {
                     flex: 2,
                     child: PlotTheftsToReportDateFl(),
                   ),
-                  Expanded(
-                    flex: 0,
-                    child: Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: Theme.of(context).primaryColor,
+                  Column(
+                    children: [
+                      Expanded(
+                        flex: 2,
+                        child: Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              primary: Theme.of(context).primaryColor,
+                            ),
+                            onPressed: () => Navigator.of(context).pop(),
+                            child: Text('Zurück'),
+                          ),
                         ),
-                        onPressed: () => Navigator.of(context).pop(),
-                        child: Text('Zurück'),
                       ),
-                    ),
+                      Expanded(
+                        flex: 2,
+                        child: Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              primary: Theme.of(context).primaryColor,
+                            ),
+                            onPressed: () => Navigator.of(context).pop(),
+                            child: Text('Zeitraum'),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),

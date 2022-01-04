@@ -6,9 +6,16 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tuple/tuple.dart';
-
 import 'utils/is_point_in_polygon.dart';
 
+final networkConnectionAvailable = StateProvider<bool>((ref) => true);
+
+final displayWidthProvider =
+    StateProvider.family<double?, double?>((ref, width) {
+  ref.read(widthProvider).state = width;
+  return width;
+});
+final widthProvider = StateProvider<double?>((ref) => null);
 // final selectedPolygonProvider = StateProvider<Polygon?>((ref) => null);
 
 /// set LOR Code(1) and LOR name(2) and the corresponding Polygon(3) for building the chart widgets
