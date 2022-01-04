@@ -1,7 +1,5 @@
 import 'package:biketheft_berlin/controller/csv_download_controller.dart';
 import 'package:biketheft_berlin/controller/data_sources_controller.dart';
-import 'package:biketheft_berlin/services/csv_download_service.dart';
-import 'package:biketheft_berlin/services/csv_read_service.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hive/hive.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
