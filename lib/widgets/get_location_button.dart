@@ -1,6 +1,5 @@
 import 'package:biketheft_berlin/controller/location_controller.dart';
 import 'package:biketheft_berlin/services/custom_exception.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -37,6 +36,8 @@ class GetLocationButton extends ConsumerWidget {
           child: Padding(
             padding: const EdgeInsets.only(right: 18.0, bottom: 18),
             child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  shape: CircleBorder(), minimumSize: Size(56, 56)),
               child: Icon(
                 Icons.location_searching_rounded,
                 color: IconTheme.of(context).color,

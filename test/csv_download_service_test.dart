@@ -1,5 +1,5 @@
 import 'package:biketheft_berlin/controller/csv_download_controller.dart';
-import 'package:biketheft_berlin/services/csv_download_service.dart';
+import 'package:biketheft_berlin/controller/data_sources_controller.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hive/hive.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -42,11 +42,16 @@ void main() async {
         // );
       },
     );
-    // test('get csv string', () async {
-    //   CsvDownloadService service = CsvDownloadService();
-    //   var csv = await service.getCsv();
-    //   print(csv);
-    // });
+    test('get accidents string', () async {
+      final container = ProviderContainer();
+    });
+    test('get polygon list', () async {
+      final container = ProviderContainer();
+      expect(
+        container.read(polygonProvider),
+        const AsyncValue.loading(),
+      );
+    });
     // test('download csv as string convert it to list and print it to console',
     //     () async {
     //       csvListProvider.future;

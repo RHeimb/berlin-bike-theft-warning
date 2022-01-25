@@ -1,12 +1,17 @@
 import 'dart:async';
 import 'dart:math';
+import 'package:biketheft_berlin/services/csv_download_service.dart';
+import 'package:biketheft_berlin/services/csv_read_service.dart';
 import 'package:biketheft_berlin/services/custom_exception.dart';
 import 'package:biketheft_berlin/services/geojson_service.dart';
+import 'package:csv/csv.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geojson/geojson.dart';
 import 'package:geopoint/geopoint.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:simplify/simplify.dart';
 import 'package:proj4dart/proj4dart.dart' as proj4;
 
@@ -115,6 +120,68 @@ class PolygonController extends StateNotifier<AsyncValue<List<Polygon>>> {
     return GeoPoint(longitude: newPoint.x, latitude: newPoint.y);
   }
 }
-// class PloygonController extents StateNotifier<AsyncValue<List<Ploygon>>>{
 
+// Bicycle accidents for LOR
+
+final accidentsCsvReaderProvider = FutureProvider<String?>((ref) async {
+  final csvString = await ref.read(csvReadServiceProvider).readCsv(
+      path:
+          'assets/AfSBBB_BE_LOR_Strasse_Strassenverkehrsunfaelle_2020_Datensatz.csv');
+  return csvString;
+});
+
+final accidentsListProvider = FutureProvider<List<dynamic>>(
+  (ref) {
+    final Box csvBox = ref.watch(csvBoxProvider);
+    return AccidentsListController(ref.read, csvBox).getLatestAccidentsList();
+  },
+);
+
+class AccidentsListController {
+  final Reader _read;
+  final Box _csvBox;
+  AccidentsListController(this._read, this._csvBox);
+
+  Future<List<dynamic>> getLatestAccidentsList() async {
+    List<dynamic>? accidentsList = _csvBox.get('accidentsList');
+    if (accidentsList != null) {
+      return _csvBox.get('accidentsList');
+    } else {
+      final latest = await accidentsStringToList();
+      return latest;
+    }
+  }
+
+  Future<List<List<dynamic>>> accidentsStringToList() async {
+    final accidentsList = await _read(accidentsCsvReaderProvider.future)
+        .then((csv) => CsvToListConverter().convert(csv, fieldDelimiter: ';'));
+    await _csvBox.put('accidentsList', accidentsList);
+    return accidentsList;
+  }
+}
+
+// class AccidentsListController extends StateNotifier<AsyncValue<List<dynamic>>> {
+//   final Reader _read;
+//   final Box _csvBox;
+//   AccidentsListController(this._read, this._csvBox)
+//       : super(AsyncValue.loading()) {
+//     getLatestAccidentsList();
+//   }
+
+//   Future<void> getLatestAccidentsList() async {
+//     List<dynamic>? accidentsList = _csvBox.get('accidentsList');
+//     if (accidentsList != null) {
+//       state = AsyncValue.data(_csvBox.get('accidentsList'));
+//     } else {
+//       final latest = await accidentsStringToList();
+//       state = AsyncValue.data(latest);
+//     }
+//   }
+
+//   Future<List<List<dynamic>>> accidentsStringToList() async {
+//     final accidentsList = await _read(accidentsCsvReaderProvider.future)
+//         .then((csv) => CsvToListConverter().convert(csv));
+//     await _csvBox.put('accidentsList', accidentsList);
+//     return accidentsList;
+//   }
 // }

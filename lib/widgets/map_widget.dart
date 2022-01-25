@@ -1,4 +1,3 @@
-import 'package:biketheft_berlin/controller/csv_download_controller.dart';
 import 'package:biketheft_berlin/controller/data_sources_controller.dart';
 import 'package:biketheft_berlin/controller/location_controller.dart';
 import 'package:biketheft_berlin/general_provider.dart';
@@ -20,7 +19,6 @@ class MapWidget extends ConsumerWidget {
   final LatLng centerLatLng = LatLng(52.51784, 13.406815);
   final _selectedPolygon;
   MapWidget(this._selectedPolygon);
-
   @override
   Widget build(BuildContext context, ScopedReader watch) {
     final polygons = watch(polygonProvider);
@@ -28,6 +26,7 @@ class MapWidget extends ConsumerWidget {
     final _mapController = context.read(mapControllerMoveProvider).state;
     final _zoomButtonsState = watch(zoomButtonsControllerProvider);
     final _selectedLatLng = watch(locationMarkerProvider).state;
+    final networkConnection = watch(networkConnectionAvailable).state;
 
     LatLng currentLatLng;
 
@@ -100,63 +99,67 @@ class MapWidget extends ConsumerWidget {
       resolutions: resolutions,
     );
 
-    return polygons.when(
-      data: (polyDat) {
-        return FlutterMap(
-          mapController: _mapController,
-          options: MapOptions(
-              onTap:
-                  selectedPolygon, // on Tap kann verwendet werden um ein popup an der Stelle anzuzeige
-              minZoom: 1.0,
-              maxZoom: resolutions.length - 1,
-              zoom: 3.0,
-              crs: epsg25833CRS,
-              center: currentLatLng,
-              // bounds: LatLngBounds(
-              //     LatLng(52.6596, 13.1314), LatLng(52.2794, 13.6489)),
-              plugins: _zoomButtonsState ? [MapZoomButtonsPlugin()] : []),
-          layers: [
-            TileLayerOptions(
-              attributionBuilder: (_) {
-                return Text(
-                  "© OpenStreetMap contributors",
-                  style: TextStyle(fontSize: 12),
-                );
-              },
-              wmsOptions: WMSTileLayerOptions(
-                  crs: epsg25833CRS,
-                  baseUrl: "https://ows.terrestris.de/osm/service?",
-                  format: 'image/jpeg',
-                  layers: ['OSM-WMS']),
-            ),
-            MarkerLayerOptions(markers: markers),
-            PolygonLayerOptions(
-              polygons: _selectedPolygons,
-            ),
-          ],
-          nonRotatedLayers: _zoomButtonsState
-              ? [
-                  MapZoomButtonsPluginOption(
-                    minZoom: 1,
+    return networkConnection
+        ? polygons.when(
+            data: (polyDat) {
+              return FlutterMap(
+                mapController: _mapController,
+                options: MapOptions(
+                    onTap:
+                        selectedPolygon, // on Tap kann verwendet werden um ein popup an der Stelle anzuzeige
+                    minZoom: 1.0,
                     maxZoom: resolutions.length - 1,
-                    mini: false,
-                    padding: 18,
-                    alignment: Alignment.topLeft,
+                    zoom: 3.0,
+                    crs: epsg25833CRS,
+                    center: currentLatLng,
+                    // bounds: LatLngBounds(
+                    //     LatLng(52.6596, 13.1314), LatLng(52.2794, 13.6489)),
+                    plugins: _zoomButtonsState ? [MapZoomButtonsPlugin()] : []),
+                layers: [
+                  TileLayerOptions(
+                    attributionBuilder: (_) {
+                      return Text(
+                        "© OpenStreetMap contributors",
+                        style: TextStyle(fontSize: 12),
+                      );
+                    },
+                    wmsOptions: WMSTileLayerOptions(
+                        crs: epsg25833CRS,
+                        baseUrl: "https://ows.terrestris.de/osm/service?",
+                        format: 'image/jpeg',
+                        layers: ['OSM-WMS']),
                   ),
-                ]
-              : [],
-          nonRotatedChildren: <Widget>[GetLocationButton()],
-        );
-      },
-      loading: () => Center(
-        child: CircularProgressIndicator(),
-      ),
-      error: (e, _) => Center(
-        child: Text(
-          e.toString(),
-        ),
-      ),
-    );
+                  MarkerLayerOptions(markers: markers),
+                  PolygonLayerOptions(
+                    polygons: _selectedPolygons,
+                  ),
+                ],
+                nonRotatedLayers: _zoomButtonsState
+                    ? [
+                        MapZoomButtonsPluginOption(
+                          minZoom: 1,
+                          maxZoom: resolutions.length - 1,
+                          mini: false,
+                          padding: 18,
+                          alignment: Alignment.topLeft,
+                        ),
+                      ]
+                    : [],
+                nonRotatedChildren: <Widget>[GetLocationButton()],
+              );
+            },
+            loading: () => Center(
+              child: CircularProgressIndicator(),
+            ),
+            error: (e, _) => Center(
+              child: Text(
+                e.toString(),
+              ),
+            ),
+          )
+        : Center(
+            child: Text('Karte offline nicht verfügbar'),
+          );
   }
 }
 
@@ -193,3 +196,13 @@ class LocationMarker extends HookWidget {
 }
 
 class TapPosition {}
+
+final snackBar = SnackBar(
+  content: const Text('Yay! A SnackBar!'),
+  action: SnackBarAction(
+    label: 'Undo',
+    onPressed: () {
+      // Some code to undo the change.
+    },
+  ),
+);
