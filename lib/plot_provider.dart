@@ -27,6 +27,7 @@ class AccidentsToHour {
 
 final itemCountProvider = StateProvider<int>((ref) => 30);
 final chartIdProvider = StateProvider<int?>((ref) => 0);
+
 final chartDropdownString = StateProvider<String>((ref) {
   final _id = ref.watch(chartIdProvider);
   switch (_id.state) {

@@ -48,21 +48,7 @@ class ChartBox extends ConsumerWidget {
                     ),
                   ),
                 ),
-                Expanded(
-                  flex: 2,
-                  child: Scrollbar(
-                    controller: _scrollController,
-                    isAlwaysShown: true,
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      controller: _scrollController,
-                      child: Container(
-                          width: displayWidth(context),
-                          padding: EdgeInsets.all(10),
-                          child: chartWidget),
-                    ),
-                  ),
-                ),
+                chartWidget,
                 Container(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
