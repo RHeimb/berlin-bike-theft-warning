@@ -1,5 +1,6 @@
 import 'package:biketheft_berlin/controller/lor_bike_accidents_info.dart';
 import 'package:biketheft_berlin/controller/lor_bike_theft_info.dart';
+import 'package:biketheft_berlin/plot_provider.dart';
 import 'package:biketheft_berlin/screens/plot_accidents_fl.dart';
 import 'package:biketheft_berlin/screens/plot_thefts_to_report_date_fl.dart';
 import 'package:biketheft_berlin/screens/settings_screen.dart';
@@ -13,11 +14,11 @@ import '../general_provider.dart';
 class MapScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
+    final modus = watch(modusStateProvider); // 0=Thefts, 1=Accidents
     final lorCode = watch(selectedLorProvider).state?.item1;
     final title = watch(selectedLorProvider).state?.item2;
     final selectedPolygon = watch(selectedLorProvider).state?.item3;
     final color = watch(theftsColorCodeProvider(lorCode));
-    final modus = watch(modusStateProvider); // 0=Thefts, 1=Accidents
 
     return Scaffold(
       bottomNavigationBar: SizedBox(

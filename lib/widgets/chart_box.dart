@@ -5,8 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class ChartBox extends ConsumerWidget {
-  ChartBox({Key? key, required this.title, required this.chartWidget})
-      : super(key: key);
+  ChartBox({
+    Key? key,
+    required this.title,
+    required this.chartWidget,
+  }) : super(key: key);
 
   final String? title;
   final Widget chartWidget;

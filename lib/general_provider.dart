@@ -10,6 +10,8 @@ import 'utils/is_point_in_polygon.dart';
 
 final networkConnectionAvailable = StateProvider<bool>((ref) => true);
 
+final lorErrorProvider = StateProvider<bool>((ref) => false);
+
 final displayWidthProvider =
     StateProvider.family<double?, double?>((ref, width) {
   ref.read(widthProvider).state = width;
@@ -20,16 +22,21 @@ final widthProvider = StateProvider<double?>((ref) => null);
 
 /// set LOR Code(1) and LOR name(2) and the corresponding Polygon(3) for building the chart widgets
 final selectedLorProvider =
-    StateProvider<Tuple3<String?, String?, Polygon>?>((ref) {
+    StateProvider<Tuple3<String?, String?, Polygon?>?>((ref) {
   var polygons = ref.watch(polygonProvider);
   var m = ref.read(lorHashMapProvider).state;
   var point = ref.watch(locationMarkerProvider).state;
+
   if (polygons.data != null) {
-    Polygon _selectedPolygon =
-        polygons.data!.value.firstWhere((p) => pointInPolygon(point, p));
-    // ref.read(selectedPolygonProvider).state = _selectedPolygon;
-    return Tuple3(m[_selectedPolygon.hashCode]!.elementAt(1),
-        m[_selectedPolygon.hashCode]!.elementAt(0), _selectedPolygon);
+    try {
+      Polygon _selectedPolygon =
+          polygons.data!.value.firstWhere((p) => pointInPolygon(point, p));
+      // ref.read(selectedPolygonProvider).state = _selectedPolygon;
+      return Tuple3(m[_selectedPolygon.hashCode]!.elementAt(1),
+          m[_selectedPolygon.hashCode]!.elementAt(0), _selectedPolygon);
+    } catch (e) {
+      print("nicht in Berlin!");
+    }
   } else {
     return null;
   }

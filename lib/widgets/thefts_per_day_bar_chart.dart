@@ -19,7 +19,7 @@ class TheftsPerDayBarChart extends ConsumerWidget {
         borderData: FlBorderData(show: false),
         groupsSpace: 2,
         alignment: BarChartAlignment.spaceEvenly,
-        barGroups: seriesList.sublist(0, _timeframe.state ?? 30),
+        barGroups: seriesList.sublist(0, _timeframe.state ?? seriesList.length),
         barTouchData: BarTouchData(
           touchTooltipData: BarTouchTooltipData(
               getTooltipItem: (group, groupIndex, rod, rodIndex) {
@@ -50,7 +50,7 @@ class TheftsPerDayBarChart extends ConsumerWidget {
           bottomTitles: SideTitles(
             rotateAngle: 30,
             showTitles: true,
-            reservedSize: 16,
+            reservedSize: 20,
             getTextStyles: (context, value) =>
                 Theme.of(context).textTheme.subtitle2,
             margin: 5,
