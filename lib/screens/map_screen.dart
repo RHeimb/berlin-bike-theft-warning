@@ -67,14 +67,16 @@ class MapScreen extends ConsumerWidget {
                     children: [
                       Icon(
                         Icons.circle,
-                        color: color.when(
-                          data: (color) => color,
-                          loading: () {
-                            return Theme.of(context).primaryColor;
-                          },
-                          error: (error, stackTrace) =>
-                              Theme.of(context).primaryColor,
-                        ),
+                        color: modus.state == 1
+                            ? Colors.black
+                            : color.when(
+                                data: (color) => color,
+                                loading: () {
+                                  return Theme.of(context).primaryColor;
+                                },
+                                error: (error, stackTrace) =>
+                                    Theme.of(context).primaryColor,
+                              ),
                       ),
                       modus.state == 0
                           ? Text(
@@ -102,7 +104,10 @@ class MapScreen extends ConsumerWidget {
                       Icon(
                         Icons.settings,
                       ),
-                      Text('Einstellungen'),
+                      Text(
+                        'Einstellungen',
+                        textAlign: TextAlign.center,
+                      ),
                     ],
                   ),
                 ),

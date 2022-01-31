@@ -92,8 +92,8 @@ final accidentsHourChartDataFl =
   linebarSpotData.sort((a, b) => a.x.compareTo(b.x));
   return LineChartBarData(
       spots: linebarSpotData,
-      colors: [Colors.white],
-      barWidth: 7,
+      colors: [Colors.blueAccent],
+      barWidth: 3,
       preventCurveOverShooting: true,
       belowBarData: BarAreaData(show: true),
       isCurved: true,

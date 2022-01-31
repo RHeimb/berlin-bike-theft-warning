@@ -10,11 +10,12 @@ class AppTheme {
       style: ElevatedButton.styleFrom(
         onPrimary: Colors.black,
         primary: Colors.blueGrey.shade100,
+        shape: ContinuousRectangleBorder(),
         textStyle: TextStyle(
           color: Colors.black,
         ),
         // shape: CircleBorder(),
-        minimumSize: Size(46, 46),
+        minimumSize: Size(40, 40),
       ),
     ),
     textButtonTheme: TextButtonThemeData(
@@ -46,10 +47,11 @@ class AppTheme {
       style: ElevatedButton.styleFrom(
         primary: Colors.blueGrey.shade900,
         onPrimary: Colors.white,
+        shape: ContinuousRectangleBorder(),
         textStyle: TextStyle(
           color: Colors.white,
         ),
-        minimumSize: Size(46, 46),
+        minimumSize: Size(40, 40),
       ),
     ),
     iconTheme: IconThemeData(
